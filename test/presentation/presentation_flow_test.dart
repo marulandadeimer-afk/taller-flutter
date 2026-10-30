@@ -74,6 +74,13 @@ void main() {
   testWidgets('RegisterPage valida que las contraseñas coincidan', (
     WidgetTester tester,
   ) async {
+    tester.view.physicalSize = const Size(1080, 2400);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+
     await tester.pumpWidget(const MaterialApp(home: RegisterPage()));
 
     // Ingresa contraseñas diferentes
@@ -83,8 +90,11 @@ void main() {
     await tester.enterText(textFields.at(2), '123456');
     await tester.enterText(textFields.at(3), '654321');
 
-    await tester.tap(find.text('Crear cuenta').last);
-    await tester.pump();
+    final botonCrear = find.widgetWithText(ElevatedButton, 'Crear cuenta');
+    await tester.ensureVisible(botonCrear);
+    await tester.pumpAndSettle();
+    await tester.tap(botonCrear);
+    await tester.pumpAndSettle();
 
     expect(find.text('Las contraseñas no coinciden'), findsOneWidget);
   });
@@ -92,6 +102,13 @@ void main() {
   testWidgets('DashboardPage contiene saludo Hola, Usuario y al menos 5 Cards', (
     WidgetTester tester,
   ) async {
+    tester.view.physicalSize = const Size(1080, 2400);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+
     await tester.pumpWidget(const MaterialApp(home: DashboardPage()));
 
     expect(find.text('Hola, Usuario'), findsOneWidget);
@@ -106,4 +123,3 @@ void main() {
     expect(find.text('Cerrar sesión'), findsOneWidget);
   });
 }
-
