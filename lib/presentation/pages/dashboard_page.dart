@@ -4,8 +4,8 @@ import 'profile_page.dart';
 
 /// Pantalla Principal (Dashboard).
 /// Incluye un BottomNavigationBar con 2 pestañas: Inicio y Perfil.
-/// La pestaña de Inicio muestra el saludo "Hola, Usuario" y un ListView
-/// con tarjetas de elementos recientes simulados.
+/// Utiliza assets/descarga.jfif como fondo visual con una capa traslúcida
+/// para mantener la legibilidad de las tarjetas y el contenido.
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
 
@@ -163,7 +163,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
           return Card(
             margin: const EdgeInsets.only(bottom: 12),
-            elevation: 1.5,
+            elevation: 2,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
               side: const BorderSide(color: AppColors.border),
@@ -249,14 +249,35 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       appBar: AppBar(
         title: Text(_currentIndex == 0 ? 'UserMaster - Dashboard' : 'Perfil de Usuario'),
         automaticallyImplyLeading: false, // Sin flecha de retroceso en el dashboard
       ),
-      body: _currentIndex == 0
-          ? _buildInicioTab()
-          : const ProfilePage(showAppBar: false),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // 1. Imagen de fondo del dashboard
+          Image.asset(
+            'assets/descarga.jfif',
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) => Container(
+              color: AppColors.background,
+            ),
+          ),
+
+          // 2. Capa translúcida suave para que las Cards resalten
+          Container(
+            color: Colors.white.withOpacity(0.88),
+          ),
+
+          // 3. Contenido de las pestañas
+          SafeArea(
+            child: _currentIndex == 0
+                ? _buildInicioTab()
+                : const ProfilePage(showAppBar: false),
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
@@ -284,4 +305,3 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 }
-
