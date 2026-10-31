@@ -40,10 +40,14 @@ class _SplashPageState extends State<SplashPage> {
         children: [
           // 1. Imagen de fondo a pantalla completa
           Image.asset(
-            'assets/descarga.jfif',
+            'assets/images.jfif',
             fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) => Container(
-              color: AppColors.primary,
+            errorBuilder: (context, error, stackTrace) => Image.asset(
+              'assets/images.jpg',
+              fit: BoxFit.cover,
+              errorBuilder: (c, e, s) => Container(
+                color: AppColors.primary,
+              ),
             ),
           ),
 
