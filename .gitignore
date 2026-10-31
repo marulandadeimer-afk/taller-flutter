@@ -46,3 +46,7 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+server.js
+build/web_artifact.zip
+build/extracted_artifact/
