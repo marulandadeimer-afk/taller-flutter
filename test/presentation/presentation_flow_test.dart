@@ -13,6 +13,13 @@ void main() {
   testWidgets('SplashPage se muestra y redirige a LoginPage tras 3 segundos', (
     WidgetTester tester,
   ) async {
+    tester.view.physicalSize = const Size(1080, 2400);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+
     await tester.pumpWidget(const UserMasterApp());
 
     // Se encuentra en Splash
@@ -29,6 +36,13 @@ void main() {
   });
 
   testWidgets('LoginPage valida campos vacíos', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1080, 2400);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+
     await tester.pumpWidget(const MaterialApp(home: LoginPage()));
 
     await tester.tap(find.text('Ingresar'));
@@ -41,6 +55,13 @@ void main() {
   testWidgets('Navegación desde Login a Registro y Recuperación de Contraseña', (
     WidgetTester tester,
   ) async {
+    tester.view.physicalSize = const Size(1080, 2400);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+
     await tester.pumpWidget(
       MaterialApp(
         initialRoute: AppRoutes.login,

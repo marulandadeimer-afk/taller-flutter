@@ -84,10 +84,10 @@ class _LoginPageState extends State<LoginPage> {
           SafeArea(
             child: Center(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                 child: Container(
                   constraints: const BoxConstraints(maxWidth: 440),
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.94),
                     borderRadius: BorderRadius.circular(20),
@@ -207,11 +207,12 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(height: 20),
 
                         // Enlace a Registro
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Wrap(
+                          alignment: WrapAlignment.center,
+                          crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
                             const Text(
-                              '¿No tienes cuenta?',
+                              '¿No tienes cuenta? ',
                               style: TextStyle(color: AppColors.textSecondary),
                             ),
                             TextButton(
